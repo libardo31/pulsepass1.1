@@ -1,0 +1,44 @@
+### 1. Crear el evento (estado inicial: DRAFT)
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "eventCode": "CMF-2026",
+  "name": "Caribbean Music Fest 2026",
+  "description": "Festival musical de prueba para el taller",
+  "category": "MUSIC",
+  "eventDate": "2026-12-15T18:00:00",
+  "minimumAge": 18,
+  "venueCode": "VEN-SMR-01"
+}
+
+### 2. Asociar Solar Beat (los artistas de referencia se insertan en orden, ID 1 a 5)
+POST http://localhost:8080/api/events/CMF-2026/artists/1
+
+### 3. Asociar Neon Waves
+POST http://localhost:8080/api/events/CMF-2026/artists/2
+
+### 4. Asociar Caribbean Sound
+POST http://localhost:8080/api/events/CMF-2026/artists/3
+
+### 5. Publicar el evento
+PATCH http://localhost:8080/api/events/CMF-2026/publish
+
+### 6. Comprar entrada GENERAL para Andrea
+POST http://localhost:8080/api/tickets
+Content-Type: application/json
+
+{
+  "userEmail": "andrea@email.com",
+  "eventCode": "CMF-2026",
+  "type": "GENERAL"
+}
+
+### 7. Consultar eventos publicados
+GET http://localhost:8080/api/events/published
+
+### 8. Consultar entradas pagadas del evento
+GET http://localhost:8080/api/events/CMF-2026/tickets/paid
+
+### 9. Consultar el usuario de prueba
+GET http://localhost:8080/api/users/by-email?email=andrea@email.com
